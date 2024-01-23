@@ -3,7 +3,7 @@ module "ntier-vpc" {
     source          = "git::https://github.com/RaskinBond/vpc_module.git"
     default_details = {
       name          = "from-tf"
-      region        = "ap-south-1"
+      region        = "ap-south-2"
     }
     vpc_details     = {
       name          = "vpc"

@@ -4,11 +4,11 @@
 # }
 
 resource "aws_instance" "WebServer" {
-  count                         = var.webserver_info.count
+  for_each                      = toset(data.aws_subnets.subnets.ids)
   ami                           = data.aws_ami.latest-amazon-linux-image.id
   instance_type                 = var.webserver_info.instance_type
   associate_public_ip_address   = var.webserver_info.public_ip_enabled
-  subnet_id                     = lookup(aws_subnet.subnets[count.index].tags_all, "Name", "")
+  subnet_id                     = each.value
   vpc_security_group_ids        = [aws_security_group.Web-SG.id]
 
   tags                          = {
