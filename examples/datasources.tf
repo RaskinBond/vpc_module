@@ -17,3 +17,11 @@ data "aws_ami" "latest-amazon-linux-image" {
     values    = [ "hvm" ]
   }
 }
+
+# data "aws_subnets" "app_subnet" {
+#   filter {
+#     name   = "tag:Name"
+#     values = var.app_subnets
+#   }
+# }
+

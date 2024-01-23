@@ -1,13 +1,14 @@
-# Azure Provider source and version being used
+# AWS Provider source and version being used
 terraform {
   required_providers {
-    azurerm = {
+    aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
   }
 }
 
-# Configuring Microsoft Provider
+# Configuring AWS Provider
 provider "aws" {
+  region = "ap-south-2"
 }

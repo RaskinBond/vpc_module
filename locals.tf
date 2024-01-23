@@ -10,14 +10,14 @@ locals {
     any_where_ipv6       = "::/0"
     default_desc         = "Created from Terraform"
     
-    db_subnet_groupname  = "stark-db-subnet-group"
-    db_allocated_storage = 20
-    db_name              = "mydb"
-    db_engine            = "mysql"
-    db_engine_version    = "8.0.32"
-    db_instance_class    = "db.t3.micro"
-    db_username          = "admin"
-    db_password          = "admin123"
-    db_identifier        = "myfirstrdsfromtf"
+    # db_subnet_groupname  = "stack-db-subnet-group"
+    # db_allocated_storage = 20
+    # db_name              = "mydb"
+    # db_engine            = "mysql"
+    # db_engine_version    = "8.0.32"
+    # db_instance_class    = "db.t3.micro"
+    # db_username          = "admin"
+    # db_password          = "admin123"
+    # db_identifier        = "myfirstrdsfromtf"
 
 }
