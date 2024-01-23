@@ -9,6 +9,7 @@ locals {
     any_where            = "0.0.0.0/0"
     any_where_ipv6       = "::/0"
     default_desc         = "Created from Terraform"
+    env_prefix           = "Jenkins"
     
     # db_subnet_groupname  = "stack-db-subnet-group"
     # db_allocated_storage = 20

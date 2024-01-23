@@ -34,3 +34,22 @@ variable "public_routes" {
     type            = list(string)
     default         = [ "webrt1", "webrt2" ]
 }
+
+variable "webserver_info" {
+    type                        = object({
+        count                   = string
+        name                    = string
+        key_name                = string
+        ami_id                  = string
+        instance_type           = string
+        public_ip_enabled       = bool        
+    })
+    default                     = {
+        count                   = "2"
+        name                    = "webservers"
+        key_name                = "from_tf"
+        ami_id                  = "ami-04a5a6be1fa530f1c"
+        instance_type           = "t3.micro"
+        public_ip_enabled       = true
+    }
+}

@@ -1,9 +1,9 @@
-# data "aws_subnets" "subnets" {
-#   filter {
-#     name   = "tag:Name"
-#     values = var.subnet_tags
-#   }
-# }
+data "aws_subnets" "subnets" {
+  filter {
+    name   = "tag:Name"
+    values = var.subnet_tags
+  }
+}
 
 data "aws_ami" "latest-amazon-linux-image" {
   most_recent = true
