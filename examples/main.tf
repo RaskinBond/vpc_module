@@ -12,14 +12,8 @@ module "ntier-vpc" {
     subnet_details {
       availability_zone = [ "ap-south-2a", "ap-south-2b", "ap-south-2c" ]
     }
-    subnet_tags {
-      tags = [ "public_subnet", "private_subnet" ]
-    }
-    public_routes {
-      
-    }
 }
 
 output "total_subnets" {
-    value           = module.my-vnet.subnet_counts
+    value           = length(module.vpc_module.subnet_details)
 }

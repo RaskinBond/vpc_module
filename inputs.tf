@@ -27,7 +27,7 @@ variable "subnet_details" {
 
 variable "subnet_tags" {
     type            = list(string)
-    default         = [ "public_subnet", "private_subnet" ]
+    default         = [ "subnet-1", "subnet-2" ]
 }
 
 variable "public_routes" {
@@ -40,7 +40,6 @@ variable "webserver_info" {
         count                   = string
         name                    = string
         key_name                = string
-        ami_id                  = string
         instance_type           = string
         public_ip_enabled       = bool        
     })
@@ -48,7 +47,6 @@ variable "webserver_info" {
         count                   = "2"
         name                    = "webservers"
         key_name                = "from_tf"
-        ami_id                  = "ami-04a5a6be1fa530f1c"
         instance_type           = "t3.micro"
         public_ip_enabled       = true
     }
