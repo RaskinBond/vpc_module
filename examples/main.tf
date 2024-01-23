@@ -10,7 +10,7 @@ module "ntier-vpc" {
       cidr_block    = "10.10.0.0/16"
     }
     subnet_details {
-      availability_zone = [ "ap-south-1a", "ap-south-1c" ]
+      availability_zone = [ "ap-south-2a", "ap-south-2c" ]
     }
 }
 
