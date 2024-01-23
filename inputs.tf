@@ -5,7 +5,7 @@ variable "default_details" {
     })
     default         = {
         name        = "from-tf"
-        region      = "ap-south-2"
+        region      = "ap-south-1"
     }
 }
 
@@ -22,7 +22,7 @@ variable "vpc_details" {
 
 variable "subnet_details" {
     type            = list(string)
-    default         = [ "ap-south-2a", "ap-south-2b", "ap-south-2c" ]
+    default         = [ "ap-south-1a", "ap-south-1c" ]
 }
 
 variable "subnet_tags" {
