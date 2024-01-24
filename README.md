@@ -82,4 +82,5 @@ _**NOTE: For any module, the 'Attribute' is your `outputs.tf` to demonstrate the
 ### Example Usage
 -----------------
 
-* Kindly, Refer to the `./examples/` folder. You can execute `terraform apply` command in the examples's folder to try the "ntier_vpc" module
+* Kindly, Refer to the `./examples/` directory. 
+* You may execute `terraform apply` command in the examples's directory to try the "ntier_vpc" module
