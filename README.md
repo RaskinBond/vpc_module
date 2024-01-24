@@ -1,7 +1,7 @@
 ## module "ntier_vpc"
 
-### Create a basic virtual private cloud in AWS using a terraform module
-------------------------------------------------------------------------
+### Creates a basic virtual private cloud in AWS using a terraform module along with 2 Jenkins {_Master-Agent_} Nodes with `latest-amazon-linux-image`
+---------------------------------------------------------------------------------------------------------------------------
 
 * This Terraform module deploys a Virtual Private Cloud in AWS with 2 subnets or a set of subnets passed in as input parameters
 
