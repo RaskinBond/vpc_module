@@ -1,13 +1,9 @@
-data "aws_subnets" "subnets" {
+data "aws_subnets" "pub_subnets" {
   filter {
-    name   = "vpc-id"
-    values = [aws_vpc.vnet.id]
-  }
-  tags     = {
-    Tier   = "subnets"
+    name   = "tag:Name"
+    values = var.web_subnet_tags
   }
 }
-
 
 data "aws_ami" "latest-amazon-linux-image" {
   most_recent = true

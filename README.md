@@ -1,11 +1,11 @@
-## module "my-vnet"
+## module "ntier_vpc"
 
-### Create a basic virtual network in Azure using a tf module
--------------------------------------------------------------
+### Create a basic virtual private cloud in AWS using a terraform module
+------------------------------------------------------------------------
 
-* This Terraform module deploys a Virtual Network in Azure with a subnet or a set of subnets passed in as input parameters
+* This Terraform module deploys a Virtual Private Cloud in AWS with 2 subnets or a set of subnets passed in as input parameters
 
-* The module does not create nor expose a security group. This would need to be defined separately as additional security rules on subnets in the deployed network
+* The module also creates 2 Route Tables(Public & Private), adding a web subnet in public rt and the app subnet in private rt and ofcourse a security group to allow security rules on subnets in the deployed network
 
 
 ### Required Inputs
@@ -21,6 +21,7 @@
     Description: The location of the vnet to be created
 
 _**NOTE: Since, I have used the variable type as `object({string})`, so both the required inputs are considered under same declared variable `az_rg` & also you can give variable name of your choice**_
+
 
 ### Optional Inputs
 -------------------
@@ -81,5 +82,5 @@ _**NOTE: For any module, the 'Attribute' is your `outputs.tf` to demonstrate the
 ### Example Usage
 -----------------
 
-* Please Refer to the `./examples/` folder. You can execute `terraform apply` command in examples's folder to try the "my-vnet" module
+* Please Refer to the `./examples/` folder. You can execute `terraform apply` command in the examples's folder to try the "ntier_vpc" module
 

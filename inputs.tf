@@ -15,36 +15,29 @@ variable "vpc_details" {
         cidr_block  = string
     })
     default         = {
-        name        = "tf_vpc"
+        name        = "tf-vpc"
         cidr_block  = "10.10.0.0/16"
     }
 }
 
-variable "subnet_details" {
+variable "web_subnet_tags" {
     type            = list(string)
-    default         = [ "ap-south-2a", "ap-south-2c" ]
+    default         = [ "web1", "web2" ]
 }
 
-variable "subnet_tags" {
-    type            = list(string)
-    default         = [ "subnet-1", "subnet-2" ]
-}
-
-variable "public_routes" {
-    type            = list(string)
-    default         = [ "webrt1", "webrt2" ]
-}
+# variable "public_routes" {
+#     type            = list(string)
+#     default         = [ "webrt1", "webrt2" ]
+# }
 
 variable "webserver_info" {
     type                        = object({
-        count                   = string
         name                    = string
         key_name                = string
         instance_type           = string
         public_ip_enabled       = bool        
     })
     default                     = {
-        count                   = "2"
         name                    = "webservers"
         key_name                = "from_tf"
         instance_type           = "t3.micro"

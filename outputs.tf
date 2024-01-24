@@ -1,5 +1,5 @@
 output "subnet_test" {
-    value = aws_subnet.subnets[0]
+    value = aws_subnet.pub_subnets
 }
 
 # output "instance_public_ip" {

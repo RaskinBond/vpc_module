@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.default_details.region
+}
+
 resource "aws_vpc" "vnet" {
     cidr_block          = var.vpc_details.cidr_block
     tags                = {
@@ -5,13 +9,13 @@ resource "aws_vpc" "vnet" {
     }
 }
 
-resource "aws_subnet" "subnets" {
-    count                = length(var.subnet_tags)
+resource "aws_subnet" "pub_subnets" {
+    count                = length(var.web_subnet_tags)
     vpc_id               = aws_vpc.vnet.id
     cidr_block           = cidrsubnet(var.vpc_details.cidr_block, 8, count.index)
-    availability_zone    = var.subnet_details[count.index]
+    availability_zone    = format("${var.default_details.region}%s", count.index%2==0?"a":"b")
     tags                 = {
-        Name             = var.subnet_tags[count.index]
+        Name             = var.web_subnet_tags[count.index]
     }
     depends_on           = [ aws_vpc.vnet ]
 }
@@ -21,7 +25,7 @@ resource "aws_internet_gateway" "igateway" {
     tags                 = {
         Name             = "IGW"
     }
-    depends_on           = [ aws_vpc.vnet, aws_subnet.subnets ]
+    depends_on           = [ aws_vpc.vnet, aws_subnet.pub_subnets ]
 }
 
 resource "aws_security_group" "Web-SG" {
@@ -48,7 +52,7 @@ resource "aws_security_group" "Web-SG" {
         ipv6_cidr_blocks = [local.any_where_ipv6]
     }
     tags                 = {
-        Name             = "Web Security"
+        Name             = "Web-Security"
     }
     depends_on           = [ aws_vpc.vnet ]
 }
@@ -76,7 +80,7 @@ resource "aws_security_group" "App_SG" {
         ipv6_cidr_blocks = [local.any_where_ipv6]
     }
     tags                 = {
-        Name             = "App Security"
+        Name             = "App-Security"
     }
     depends_on           = [ aws_vpc.vnet ]
 }
@@ -88,7 +92,7 @@ resource "aws_route_table" "public_rt" {
         gateway_id       = aws_internet_gateway.igateway.id
     }
         tags             = {
-        Name             = "Public RT"
+        Name             = "Public-RT"
     }
     depends_on           = [ aws_internet_gateway.igateway ]
 }
@@ -96,16 +100,16 @@ resource "aws_route_table" "public_rt" {
 resource "aws_route_table" "private_rt" {
     vpc_id               = aws_vpc.vnet.id
     tags                 = {
-        Name             = "Private RT"
+        Name             = "Private-RT"
     }
     depends_on           = [ aws_internet_gateway.igateway ]
 }
 
 resource "aws_route_table_association" "a" {
-    count               = length(var.subnet_tags)
-    subnet_id           = aws_subnet.subnets[count.index].id
-    route_table_id      = contains(var.public_routes, lookup(aws_subnet.subnets[count.index].tags_all, "Name", "")) ? aws_route_table.public_rt.id: aws_route_table.private_rt.id
-                         #count.index<2 ? aws_route_table.public_rt.id: aws_route_table.private_rt.id
+    count               = length(var.web_subnet_tags)
+    subnet_id           = aws_subnet.pub_subnets[count.index].id
+    route_table_id      = count.index<2 ? aws_route_table.public_rt.id: aws_route_table.private_rt.id
+                         #contains(var.public_routes, lookup(aws_subnet.pub_subnets[count.index].tags_all, "Name", "")) ? aws_route_table.public_rt.id: aws_route_table.private_rt.id
 
     depends_on          = [ aws_route_table.public_rt, aws_route_table.private_rt ]
 }

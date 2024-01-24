@@ -8,9 +8,11 @@ locals {
     any_protocol         = "-1"
     any_where            = "0.0.0.0/0"
     any_where_ipv6       = "::/0"
+    key_name             = "Legion"
     default_desc         = "Created from Terraform"
-    env_prefix           = "Jenkins"
-    
+    webserver_tags       = [ "Jenkins-Master", "Jenkins-Agent" ]
+    env_prefix           = "Dev"
+
     # db_subnet_groupname  = "stack-db-subnet-group"
     # db_allocated_storage = 20
     # db_name              = "mydb"
